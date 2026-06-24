@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanket | Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <h2 class="logo">Sanket</h2>
+      <ul class="nav-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#internship">Internship</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Hello, I'm <span>Sanket</span></h1>
+      <h3>Web Developer | Student | Tech Enthusiast</h3>
+      <p>I create responsive and interactive websites using HTML, CSS, JavaScript, Python, Flask, and MySQL.</p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn">View Projects</a>
+        <a href="resume/4SO25MC094_Sanket.pdf" class="btn secondary" download>Download Resume</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="image/profile.jpg" alt="Profile Image">
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>
+      I am a passionate web development student with hands-on experience in creating responsive websites and web applications. I enjoy building clean user interfaces and solving real-world problems through code. I have worked on projects involving frontend and backend technologies such as HTML, CSS, JavaScript, Python Flask, Java, and MySQL.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="section">
+    <h2>My Skills</h2>
+    <div class="skills-container">
+      <div class="skill-card">HTML</div>
+      <div class="skill-card">CSS</div>
+      <div class="skill-card">JavaScript</div>
+      <div class="skill-card">Python</div>
+      <div class="skill-card">Flask</div>
+      <div class="skill-card">MySQL</div>
+      <div class="skill-card">Java</div>
+      <div class="skill-card">GitHub</div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+    <div class="projects-container">
+
+    <div class="project-card">
+  <!-- <img src="images/project5.png" alt="SOS Voice Detection System"> -->
+  <h3>SOS Voice Detection System</h3>
+  <p>A safety-focused web application that detects emergency voice keywords such as “SOS”, “help”, or “save me” using speech recognition. When an emergency phrase is detected, the system can trigger an alert or safety response.</p>
+</div>
+
+      <div class="project-card">
+        <!-- <img src="images/project2.jpg" alt="Project 2"> -->
+        <h3>Chat Application</h3>
+        <p>A real-time chat application with emoji support, image sharing, and auto-response features.</p>
+      </div>
+
+      <div class="project-card">
+        <!-- <img src="images/project3.jpg" alt="Project 3"> -->
+        <h3>Restaurant Website</h3>
+        <p>A responsive food website with homepage, restaurant listing page, and fast food menu page.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Internship -->
+  <section id="internship" class="section">
+    <h2>Internship Experience</h2>
+    <div class="internship-box">
+      <h3>Web Development Intern</h3>
+      <p><strong>Company:</strong> Saiket Systems</p>
+      <p>
+        Worked on web development tasks involving HTML, CSS, JavaScript, responsive layouts, and portfolio/project websites. Improved frontend development and design skills through practical assignments.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section">
+    <h2>Contact Me</h2>
+    <form class="contact-form" onsubmit="return showMessage()">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+    <p id="success-msg"></p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2026 Sanket | Portfolio Website</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

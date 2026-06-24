@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Pro - Wireless Headphones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">AURA<span>.</span></div>
+        <ul class="nav-links">
+            <li><a href="#">Products</a></li>
+            <li><a href="#">Technology</a></li>
+            <li><a href="#">Support</a></li>
+        </ul>
+        <div class="nav-icons">
+            <button class="icon-btn"><i class="fas fa-search"></i></button>
+            <button class="icon-btn"><i class="far fa-user"></i></button>
+            <button class="icon-btn cart-btn">
+                <i class="fas fa-shopping-bag"></i>
+                <span class="cart-badge">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="product-container">
+        <!-- Image Section -->
+        <div class="product-gallery">
+            <div class="main-image-container">
+                <img src="assets/main.png" alt="Aura Pro Wireless Headphones Main" class="main-image" id="mainImage">
+                <div class="glass-highlight"></div>
+            </div>
+            <div class="thumbnail-list">
+                <div class="thumbnail active" onclick="changeImage('assets/main.png', this)">
+                    <img src="assets/main.png" alt="Front view">
+                </div>
+                <div class="thumbnail" onclick="changeImage('assets/thumb1.png', this)">
+                    <img src="assets/thumb1.png" alt="Earcup detail">
+                </div>
+                <div class="thumbnail" onclick="changeImage('assets/thumb2.png', this)">
+                    <img src="assets/thumb2.png" alt="Carrying case">
+                </div>
+            </div>
+        </div>
+
+        <!-- Details Section -->
+        <div class="product-details">
+            <div class="breadcrumbs">Home / Audio / Headphones / <span>Aura Pro</span></div>
+            
+            <h1 class="product-title">Aura Pro Wireless Noise-Cancelling Headphones</h1>
+            
+            <div class="rating-review">
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <span class="review-count">4.8 (2,149 reviews)</span>
+            </div>
+
+            <div class="price-section">
+                <span class="current-price">$349.00</span>
+                <span class="original-price">$399.00</span>
+                <span class="discount-badge">Save $50</span>
+            </div>
+
+            <p class="product-description">
+                Experience pure audio nirvana with our industry-leading active noise cancellation. The Aura Pro delivers crisp highs, deep bass, and unparalleled comfort for all-day listening.
+            </p>
+
+            <div class="options-container">
+                <div class="color-selection">
+                    <h3>Color: <span id="colorName">Midnight Black</span></h3>
+                    <div class="color-options">
+                        <button class="color-btn active" style="background-color: #1a1a1a;" onclick="selectColor('Midnight Black', this)"></button>
+                        <button class="color-btn" style="background-color: #f2f2f2;" onclick="selectColor('Lunar White', this)"></button>
+                        <button class="color-btn" style="background-color: #2c3e50;" onclick="selectColor('Ocean Blue', this)"></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-section">
+                <div class="quantity-selector">
+                    <button class="qty-btn" onclick="updateQuantity(-1)"><i class="fas fa-minus"></i></button>
+                    <input type="number" id="qty" value="1" min="1" max="10">
+                    <button class="qty-btn" onclick="updateQuantity(1)"><i class="fas fa-plus"></i></button>
+                </div>
+                
+                <div class="buttons-group">
+                    <button class="btn-primary" onclick="addToCart()">
+                        <i class="fas fa-shopping-bag"></i> Add to Cart
+                    </button>
+                    <button class="btn-secondary">Buy Now</button>
+                </div>
+            </div>
+
+            <div class="features-list">
+                <div class="feature-item">
+                    <i class="fas fa-volume-mute"></i>
+                    <span>Active Noise Cancellation</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-battery-full"></i>
+                    <span>40-Hour Battery Life</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-bluetooth"></i>
+                    <span>Bluetooth 5.3 Multipoint</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-feather-alt"></i>
+                    <span>Ultra-Lightweight Design</span>
+                </div>
+            </div>
+            
+            <div class="shipping-info">
+                <p><i class="fas fa-truck"></i> Free express shipping over $100</p>
+                <p><i class="fas fa-undo"></i> 30-day money-back guarantee</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i> Added to cart successfully!
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
