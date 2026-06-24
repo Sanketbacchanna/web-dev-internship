@@ -16,11 +16,11 @@
         <ul class="nav-links">
             <li><a href="#">Products</a></li>
             <li><a href="#">Technology</a></li>
-            <li><a href="#">Support</a></li>
+            <li><a href="#" onclick="openSupport(event)">Support</a></li>
         </ul>
         <div class="nav-icons">
-            <button class="icon-btn"><i class="fas fa-search"></i></button>
-            <button class="icon-btn"><i class="far fa-user"></i></button>
+            <button class="icon-btn" onclick="openSearch()"><i class="fas fa-search"></i></button>
+            <button class="icon-btn" onclick="openProfile()"><i class="far fa-user"></i></button>
             <button class="icon-btn cart-btn">
                 <i class="fas fa-shopping-bag"></i>
                 <span class="cart-badge">0</span>
@@ -76,12 +76,12 @@
             </p>
 
             <div class="options-container">
-                <div class="color-selection">
-                    <h3>Color: <span id="colorName">Midnight Black</span></h3>
-                    <div class="color-options">
-                        <button class="color-btn active" style="background-color: #1a1a1a;" onclick="selectColor('Midnight Black', this)"></button>
-                        <button class="color-btn" style="background-color: #f2f2f2;" onclick="selectColor('Lunar White', this)"></button>
-                        <button class="color-btn" style="background-color: #2c3e50;" onclick="selectColor('Ocean Blue', this)"></button>
+                <div class="brand-selection">
+                    <h3>Brand: <span id="brandName">Sony</span></h3>
+                    <div class="brand-options">
+                        <button class="brand-btn active" onclick="selectBrand('Sony', this)">Sony</button>
+                        <button class="brand-btn" onclick="selectBrand('Bose', this)">Bose</button>
+                        <button class="brand-btn" onclick="selectBrand('Sennheiser', this)">Sennheiser</button>
                     </div>
                 </div>
             </div>
