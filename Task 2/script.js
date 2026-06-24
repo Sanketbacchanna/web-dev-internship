@@ -10,6 +10,12 @@ function changeImage(src, element) {
 }
 
 // Color Selection functionality
+const colorPrices = {
+    'Midnight Black': { current: '$349.00', original: '$399.00', save: 'Save $50' },
+    'Lunar White': { current: '$359.00', original: '$419.00', save: 'Save $60' },
+    'Ocean Blue': { current: '$379.00', original: '$429.00', save: 'Save $50' }
+};
+
 function selectColor(colorName, element) {
     // Update color text
     document.getElementById('colorName').innerText = colorName;
@@ -18,6 +24,14 @@ function selectColor(colorName, element) {
     const colorBtns = document.querySelectorAll('.color-btn');
     colorBtns.forEach(btn => btn.classList.remove('active'));
     element.classList.add('active');
+    
+    // Update prices
+    const prices = colorPrices[colorName];
+    if (prices) {
+        document.querySelector('.current-price').innerText = prices.current;
+        document.querySelector('.original-price').innerText = prices.original;
+        document.querySelector('.discount-badge').innerText = prices.save;
+    }
 }
 
 // Quantity functionality
@@ -60,4 +74,11 @@ function showToast() {
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);
+}
+
+// Buy Now functionality
+function buyNow() {
+    const qty = parseInt(document.getElementById('qty').value);
+    const color = document.getElementById('colorName').innerText;
+    alert(`Proceeding to checkout! \\nYou are purchasing ${qty}x Aura Pro (${color}).`);
 }
