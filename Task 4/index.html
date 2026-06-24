@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Contact Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+    
+    <div class="container">
+        <div class="form-wrapper glass-effect">
+            <div class="form-header">
+                <h1>Let's Connect</h1>
+                <p>We'd love to hear from you. Drop us a message below.</p>
+            </div>
+            
+            <form id="contactForm" novalidate>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="fullName">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" placeholder="John Doe" required>
+                        <span class="error-message" id="fullNameError">Please enter your name</span>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        <span class="error-message" id="emailError">Please enter a valid email</span>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="subject">Subject</label>
+                    <div class="select-wrapper">
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>Select a subject...</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="support">Technical Support</option>
+                            <option value="billing">Billing Question</option>
+                            <option value="partnership">Partnership Opportunity</option>
+                        </select>
+                        <svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+                    </div>
+                    <span class="error-message" id="subjectError">Please select a subject</span>
+                </div>
+                
+                <div class="input-group">
+                    <label>Priority Level</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="priority" value="low" checked>
+                            <span class="radio-custom"></span>
+                            Low
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="priority" value="medium">
+                            <span class="radio-custom"></span>
+                            Medium
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="priority" value="high">
+                            <span class="radio-custom"></span>
+                            High
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="How can we help you?" required></textarea>
+                    <span class="error-message" id="messageError">Please enter your message</span>
+                </div>
+                
+                <div class="input-group checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="newsletter" name="newsletter">
+                        <span class="checkbox-custom">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </span>
+                        Subscribe to our newsletter for updates
+                    </label>
+                </div>
+                
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-text">Send Message</span>
+                    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                </button>
+            </form>
+
+            <div class="success-state hidden" id="successState">
+                <div class="success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                </div>
+                <h2>Message Sent!</h2>
+                <p>Thanks for reaching out. We'll get back to you shortly.</p>
+                <button class="submit-btn reset-btn" id="resetBtn">Send Another Message</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
