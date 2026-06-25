@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Smart Finance</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+
+    <div class="app-container">
+        <!-- Header / Summary -->
+        <header class="dashboard-header glass">
+            <div class="balance-wrapper">
+                <p>Total Balance</p>
+                <h1 id="totalBalance">$0.00</h1>
+            </div>
+            <div class="stats-row">
+                <div class="stat-card income">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                    </div>
+                    <div>
+                        <p>Income</p>
+                        <h3 id="totalIncome">$0.00</h3>
+                    </div>
+                </div>
+                <div class="stat-card expense">
+                    <div class="icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+                    </div>
+                    <div>
+                        <p>Expenses</p>
+                        <h3 id="totalExpense">$0.00</h3>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Add Transaction Form -->
+            <section class="form-section glass">
+                <h2>New Transaction</h2>
+                <form id="transactionForm">
+                    <div class="form-group">
+                        <label for="text">Description</label>
+                        <input type="text" id="text" placeholder="e.g. Salary, Groceries..." required autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Amount</label>
+                        <input type="number" id="amount" placeholder="0.00" step="0.01" required>
+                    </div>
+                    <div class="type-selector">
+                        <label class="radio-label">
+                            <input type="radio" name="type" value="income" checked>
+                            <span class="radio-btn income-btn">Income</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="type" value="expense">
+                            <span class="radio-btn expense-btn">Expense</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="submit-btn">Add Transaction</button>
+                </form>
+            </section>
+
+            <!-- Transactions List -->
+            <section class="history-section glass">
+                <div class="history-header">
+                    <h2>Recent History</h2>
+                    <button id="clearBtn" class="clear-btn text-muted">Clear All</button>
+                </div>
+                <ul id="list" class="list">
+                    <!-- Transactions will be injected here via JS -->
+                </ul>
+                <div id="emptyState" class="empty-state hidden">
+                    <p>No transactions yet.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
