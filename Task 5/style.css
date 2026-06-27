@@ -32,7 +32,6 @@ body {
     position: relative;
 }
 
-/* Background Gradients */
 .bg-shape {
     position: fixed;
     border-radius: 50%;
@@ -57,7 +56,6 @@ body {
     background: radial-gradient(circle, rgba(139,92,246,0.2) 0%, transparent 70%);
 }
 
-/* Utilities */
 .glass {
     background: var(--glass-bg);
     backdrop-filter: blur(12px);
@@ -151,7 +149,6 @@ body {
     height: 20px;
 }
 
-/* Navbar */
 .navbar {
     position: fixed;
     top: 0;
@@ -189,7 +186,6 @@ body {
     color: #a5b4fc;
 }
 
-/* Main Layout */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -215,7 +211,6 @@ body {
     margin: 0 auto;
 }
 
-/* Blog Grid */
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -323,7 +318,6 @@ body {
     gap: 0.5rem;
 }
 
-/* Empty State */
 .empty-state {
     text-align: center;
     padding: 4rem 2rem;
@@ -351,7 +345,6 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Modals */
 .modal {
     position: fixed;
     top: 0;
@@ -386,7 +379,6 @@ body {
     animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Article View specific modal styling */
 .article-content {
     position: relative;
     width: 100%;
@@ -458,7 +450,6 @@ body {
     font-size: 1.8rem;
 }
 
-/* Forms */
 .editor-form {
     display: flex;
     flex-direction: column;
@@ -527,7 +518,6 @@ select option {
     border-top: 1px solid var(--glass-border);
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -545,7 +535,6 @@ select option {
     background: #4b5563;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .page-header h1 { font-size: 2.5rem; }
     .form-row { flex-direction: column; gap: 1.5rem; }

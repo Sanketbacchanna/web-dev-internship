@@ -28,7 +28,6 @@ body {
         radial-gradient(circle at 85% 30%, rgba(0, 150, 255, 0.05), transparent 25%);
 }
 
-/* Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -131,7 +130,6 @@ body {
     border-radius: 50%;
 }
 
-/* Product Container */
 .product-container {
     max-width: 1400px;
     margin: 3rem auto;
@@ -141,7 +139,6 @@ body {
     gap: 4rem;
 }
 
-/* Image Gallery */
 .product-gallery {
     display: flex;
     flex-direction: column;
@@ -221,7 +218,6 @@ body {
     border-color: var(--accent-color);
 }
 
-/* Product Details */
 .product-details {
     display: flex;
     flex-direction: column;
@@ -496,7 +492,6 @@ body {
     gap: 0.8rem;
 }
 
-/* Toast Notification */
 .toast {
     position: fixed;
     bottom: 2rem;
@@ -524,7 +519,6 @@ body {
     font-size: 1.2rem;
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
     .product-container {
         grid-template-columns: 1fr;

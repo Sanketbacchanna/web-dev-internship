@@ -29,7 +29,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Background Animation */
 .bg-orb {
     position: fixed;
     border-radius: 50%;
@@ -61,7 +60,6 @@ body {
     100% { transform: translate(-50px, 100px) scale(1.2); }
 }
 
-/* Layout */
 .app-container {
     width: 100%;
     max-width: 900px;
@@ -80,7 +78,6 @@ body {
     padding: 2rem;
 }
 
-/* Header */
 .dashboard-header {
     text-align: center;
     display: flex;
@@ -160,7 +157,6 @@ body {
 .stat-card.income h3 { color: var(--income); }
 .stat-card.expense h3 { color: var(--expense); }
 
-/* Main Content Grid */
 .main-content {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
@@ -176,7 +172,6 @@ body {
     }
 }
 
-/* Form */
 h2 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
@@ -212,7 +207,6 @@ input:focus {
     box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
-/* Radio Buttons */
 .type-selector {
     display: flex;
     gap: 1rem;
@@ -251,7 +245,6 @@ input:focus {
     color: var(--expense);
 }
 
-/* Submit Button */
 .submit-btn {
     width: 100%;
     padding: 1rem;
@@ -271,7 +264,6 @@ input:focus {
     box-shadow: 0 10px 20px -10px rgba(99, 102, 241, 0.5);
 }
 
-/* History List */
 .history-section {
     display: flex;
     flex-direction: column;
@@ -307,7 +299,6 @@ input:focus {
     padding-right: 0.5rem;
 }
 
-/* Custom Scrollbar */
 .list::-webkit-scrollbar {
     width: 6px;
 }

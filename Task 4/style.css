@@ -32,7 +32,6 @@ body {
     overflow-x: hidden;
 }
 
-/* Background Animation */
 .background-animation {
     position: fixed;
     top: 0;
@@ -188,7 +187,6 @@ textarea:focus {
     background: rgba(15, 23, 42, 0.8);
 }
 
-/* Invalid state */
 .input-group.error input,
 .input-group.error select,
 .input-group.error textarea {
@@ -212,7 +210,6 @@ textarea:focus {
     transform: translateY(0);
 }
 
-/* Custom Select */
 .select-wrapper {
     position: relative;
 }
@@ -245,7 +242,6 @@ select:focus + .select-icon {
     color: var(--input-focus);
 }
 
-/* Custom Radio Buttons */
 .radio-group {
     display: flex;
     gap: 1.5rem;
@@ -294,7 +290,6 @@ select:focus + .select-icon {
     transform: translate(-50%, -50%) scale(1);
 }
 
-/* Custom Checkbox */
 .checkbox-group {
     margin-top: 0.5rem;
 }
@@ -344,7 +339,6 @@ select:focus + .select-icon {
     transform: scale(1);
 }
 
-/* Submit Button */
 .submit-btn {
     margin-top: 1rem;
     padding: 1rem 2rem;
@@ -398,7 +392,6 @@ select:focus + .select-icon {
     transform: translate(3px, -3px);
 }
 
-/* Success State */
 .hidden {
     display: none !important;
 }
@@ -463,7 +456,6 @@ select:focus + .select-icon {
     100% { transform: scale(1); }
 }
 
-/* Responsive */
 @media (max-width: 600px) {
     .form-row {
         flex-direction: column;

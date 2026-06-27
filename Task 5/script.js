@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
     const newPostBtn = document.getElementById('newPostBtn');
     const editorModal = document.getElementById('editorModal');
     const articleModal = document.getElementById('articleModal');
@@ -12,17 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const savePostBtn = document.getElementById('savePostBtn');
     const articleView = document.getElementById('articleView');
 
-    // Form Inputs
     const postIdInput = document.getElementById('postId');
     const titleInput = document.getElementById('postTitle');
     const categoryInput = document.getElementById('postCategory');
     const imageInput = document.getElementById('postImage');
     const contentInput = document.getElementById('postContent');
 
-    // Database simulation (LocalStorage)
     const DB_KEY = 'nexus_blog_posts';
 
-    // Default mock data if empty
     const initDB = () => {
         let posts = JSON.parse(localStorage.getItem(DB_KEY));
         if (!posts) {
@@ -56,7 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPosts();
     };
 
-    // Render Posts
     const renderPosts = () => {
         const posts = getPosts();
         blogGrid.innerHTML = '';
@@ -70,12 +65,10 @@ document.addEventListener('DOMContentLoaded', () => {
         emptyState.classList.add('hidden');
         blogGrid.classList.remove('hidden');
 
-        // Sort posts by date (newest first based on array order since we push new ones to front)
         posts.forEach(post => {
             const card = document.createElement('article');
             card.className = 'blog-card';
             
-            // Create a short excerpt from content
             const excerpt = post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content;
 
             card.innerHTML = `
@@ -104,7 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Modal Operations
     const openEditor = (isEdit = false) => {
         modalTitle.textContent = isEdit ? 'Edit Post' : 'Create New Post';
         savePostBtn.textContent = isEdit ? 'Update Post' : 'Publish Post';
@@ -119,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
         postIdInput.value = '';
     };
 
-    // CRUD Operations
     window.editPost = (id) => {
         const posts = getPosts();
         const post = posts.find(p => p.id === id);
@@ -161,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Event Listeners
     newPostBtn.addEventListener('click', () => {
         postForm.reset();
         postIdInput.value = '';
@@ -175,14 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'auto';
     });
 
-    // Close modals on backdrop click
     editorModal.querySelector('.modal-backdrop').addEventListener('click', closeEditor);
     articleModal.querySelector('.article-backdrop').addEventListener('click', () => {
         articleModal.classList.add('hidden');
         document.body.style.overflow = 'auto';
     });
 
-    // Form Submit (Create/Update)
     postForm.addEventListener('submit', (e) => {
         e.preventDefault();
         
@@ -198,11 +186,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let posts = getPosts();
         if (id) {
-            // Update existing
             const index = posts.findIndex(p => p.id === id);
             if (index !== -1) posts[index] = newPost;
         } else {
-            // Add new at the beginning
             posts.unshift(newPost);
         }
 
@@ -210,7 +196,6 @@ document.addEventListener('DOMContentLoaded', () => {
         closeEditor();
     });
 
-    // Initialize
     initDB();
     renderPosts();
 });
