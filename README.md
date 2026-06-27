@@ -59,3 +59,11 @@ Through these tasks, I gained hands-on experience in:
 
 **Sanket Bacchanna**
 Frontend / Web Development Internship Tasks Repository
+
+---
+
+## Essential Internship Guidelines
+
+* Update your LinkedIn Profile and showcase all your achievements, including the Offer Letter and Internship Completion Certificate from us. Tag Saiket Systems and use #SaiketSystems #SaiketTech #SaiketInternship.
+* Plagiarism is strictly prohibited. If your project/code is found copied, your internship will be terminated, and you will be ineligible for future opportunities with us.
+* Share a video showcasing the completed task on LinkedIn. Tag @SaiketSystems and use #SaiketSystems #SaiketTech #SaiketInternship.
