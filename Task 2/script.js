@@ -1,83 +1,61 @@
-function changeImage(src, element) {
-    document.getElementById('mainImage').src = src;
-    
-    const thumbnails = document.querySelectorAll('.thumbnail');
-    thumbnails.forEach(thumb => thumb.classList.remove('active'));
-    element.classList.add('active');
-}
+var basketTotal = 0;
 
-const brandPrices = {
-    'Sony': { current: '$349.00', original: '$399.00', save: 'Save $50' },
-    'Bose': { current: '$359.00', original: '$419.00', save: 'Save $60' },
-    'Sennheiser': { current: '$379.00', original: '$429.00', save: 'Save $50' }
+var priceMap = {
+    'Sony': { c: '$349.00', o: '$399.00', s: 'Save $50' },
+    'Bose': { c: '$359.00', o: '$419.00', s: 'Save $60' },
+    'Sennheiser': { c: '$379.00', o: '$429.00', s: 'Save $50' }
 };
 
-function selectBrand(brandName, element) {
-    document.getElementById('brandName').innerText = brandName;
+function changeImage(url, thumbNode) {
+    document.getElementById('mainImage').src = url;
+    var allThumbs = document.querySelectorAll('.thumbnail');
+    for(var i=0; i<allThumbs.length; i++) {
+        allThumbs[i].classList.remove('active');
+    }
+    thumbNode.classList.add('active');
+}
+
+function selectBrand(bName, btnNode) {
+    document.getElementById('brandName').innerHTML = bName;
+    var allBtns = document.querySelectorAll('.brand-btn');
+    for(var j=0; j<allBtns.length; j++) {
+        allBtns[j].classList.remove('active');
+    }
+    btnNode.classList.add('active');
     
-    const brandBtns = document.querySelectorAll('.brand-btn');
-    brandBtns.forEach(btn => btn.classList.remove('active'));
-    element.classList.add('active');
-    
-    const prices = brandPrices[brandName];
-    if (prices) {
-        document.querySelector('.current-price').innerText = prices.current;
-        document.querySelector('.original-price').innerText = prices.original;
-        document.querySelector('.discount-badge').innerText = prices.save;
+    var data = priceMap[bName];
+    if(data) {
+        document.querySelector('.current-price').innerHTML = data.c;
+        document.querySelector('.original-price').innerHTML = data.o;
+        document.querySelector('.discount-badge').innerHTML = data.s;
     }
 }
 
-function updateQuantity(change) {
-    const qtyInput = document.getElementById('qty');
-    let currentVal = parseInt(qtyInput.value);
-    let newVal = currentVal + change;
-    
-    if (newVal >= 1 && newVal <= 10) {
-        qtyInput.value = newVal;
+function updateQuantity(diff) {
+    var qBox = document.getElementById('qty');
+    var val = parseInt(qBox.value) + diff;
+    if (val > 0 && val <= 10) {
+        qBox.value = val;
     }
 }
-
-let cartCount = 0;
 
 function addToCart() {
-    const qty = parseInt(document.getElementById('qty').value);
-    cartCount += qty;
+    basketTotal += parseInt(document.getElementById('qty').value);
+    document.querySelector('.cart-badge').innerHTML = basketTotal;
     
-    const badge = document.querySelector('.cart-badge');
-    badge.innerText = cartCount;
-    
-    badge.style.transform = 'scale(1.5)';
-    setTimeout(() => {
-        badge.style.transform = 'scale(1)';
-    }, 200);
-    
-    showToast();
-}
-
-function showToast() {
-    const toast = document.getElementById('toast');
-    toast.classList.add('show');
-    
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+    var t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(function() {
+        t.classList.remove('show');
+    }, 2500);
 }
 
 function buyNow() {
-    const qty = parseInt(document.getElementById('qty').value);
-    const brand = document.getElementById('brandName').innerText;
-    alert(`Proceeding to checkout! \nYou are purchasing ${qty}x Aura Pro (${brand}).`);
+    var brand = document.getElementById('brandName').innerHTML;
+    var n = document.getElementById('qty').value;
+    alert("Checking out " + n + " units of " + brand);
 }
 
-function openSupport(event) {
-    if (event) event.preventDefault();
-    alert("Support center will be available soon.");
-}
-
-function openSearch() {
-    alert("Search functionality is currently disabled.");
-}
-
-function openProfile() {
-    alert("User profile is under construction.");
-}
+function openSupport(e) { if(e) e.preventDefault(); alert("Support chat is offline."); }
+function openSearch() { alert("Search feature coming soon."); }
+function openProfile() { alert("Please login first."); }

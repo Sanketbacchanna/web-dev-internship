@@ -1,93 +1,73 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('contactForm');
-    const successState = document.getElementById('successState');
-    const resetBtn = document.getElementById('resetBtn');
-
-    const fullName = document.getElementById('fullName');
-    const email = document.getElementById('email');
-    const subject = document.getElementById('subject');
-    const message = document.getElementById('message');
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    const inputs = [fullName, email, subject, message];
-    inputs.forEach(input => {
-        input.addEventListener('input', () => {
-            if (input.parentElement.classList.contains('error')) {
-                validateField(input);
-            }
-        });
+(function() {
+    function checkValid(node) {
+        var val = node.value.trim();
+        var isValid = true;
         
-        if (input.tagName === 'SELECT') {
-            input.addEventListener('change', () => {
-                if (input.parentElement.parentElement.classList.contains('error')) {
-                    validateField(input);
-                }
-            });
-        }
-    });
-
-    function validateField(input) {
-        const parent = input.tagName === 'SELECT' ? input.parentElement.parentElement : input.parentElement;
-        let isValid = true;
-
-        if (input.value.trim() === '') {
+        if (val === '') {
             isValid = false;
-        } else if (input.type === 'email' && !emailPattern.test(input.value)) {
+        } else if (node.type === 'email' && val.indexOf('@') === -1) {
             isValid = false;
         }
 
-        if (!isValid) {
-            parent.classList.add('error');
+        var wrapper = node.tagName === 'SELECT' ? node.parentNode.parentNode : node.parentNode;
+        if (isValid) {
+            wrapper.classList.remove('error');
         } else {
-            parent.classList.remove('error');
+            wrapper.classList.add('error');
         }
-
         return isValid;
     }
 
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
+    window.addEventListener('load', function() {
+        var theForm = document.getElementById('contactForm');
+        var fName = document.getElementById('fullName');
+        var fEmail = document.getElementById('email');
+        var fSubj = document.getElementById('subject');
+        var fMsg = document.getElementById('message');
 
-        const isNameValid = validateField(fullName);
-        const isEmailValid = validateField(email);
-        const isSubjectValid = validateField(subject);
-        const isMessageValid = validateField(message);
+        var allFields = [fName, fEmail, fSubj, fMsg];
 
-        if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
-            const submitBtn = document.getElementById('submitBtn');
-            const originalText = submitBtn.innerHTML;
+        for (var i = 0; i < allFields.length; i++) {
+            allFields[i].oninput = function() {
+                var p = this.tagName === 'SELECT' ? this.parentNode.parentNode : this.parentNode;
+                if (p.classList.contains('error')) {
+                    checkValid(this);
+                }
+            };
+            if (allFields[i].tagName === 'SELECT') {
+                allFields[i].onchange = allFields[i].oninput;
+            }
+        }
+
+        theForm.onsubmit = function(ev) {
+            ev.preventDefault();
+            var ok1 = checkValid(fName);
+            var ok2 = checkValid(fEmail);
+            var ok3 = checkValid(fSubj);
+            var ok4 = checkValid(fMsg);
+
+            if (ok1 && ok2 && ok3 && ok4) {
+                var btn = document.getElementById('submitBtn');
+                var old = btn.innerHTML;
+                btn.innerHTML = 'Sending...';
+                
+                setTimeout(function() {
+                    theForm.classList.add('hidden');
+                    document.getElementById('successState').classList.remove('hidden');
+                    btn.innerHTML = old;
+                }, 1200);
+            }
+        };
+
+        document.getElementById('resetBtn').onclick = function() {
+            theForm.reset();
+            document.getElementById('successState').classList.add('hidden');
+            theForm.classList.remove('hidden');
             
-            submitBtn.innerHTML = `
-                <svg class="btn-icon" style="animation: spin 1s linear infinite;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 1 1-6.219-8.56"></path></svg>
-                <span>Sending...</span>
-            `;
-            submitBtn.disabled = true;
-
-            setTimeout(() => {
-                form.classList.add('hidden');
-                successState.classList.remove('hidden');
-                submitBtn.innerHTML = originalText;
-                submitBtn.disabled = false;
-            }, 1500);
-        }
+            var errs = document.querySelectorAll('.input-group');
+            for(var k=0; k<errs.length; k++){
+                errs[k].classList.remove('error');
+            }
+        };
     });
-
-    resetBtn.addEventListener('click', () => {
-        form.reset();
-        successState.classList.add('hidden');
-        form.classList.remove('hidden');
-        
-        document.querySelectorAll('.input-group').forEach(group => {
-            group.classList.remove('error');
-        });
-    });
-
-    const style = document.createElement('style');
-    style.innerHTML = `
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-    `;
-    document.head.appendChild(style);
-});
+})();

@@ -1,153 +1,95 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const balance = document.getElementById('totalBalance');
-    const totalIncome = document.getElementById('totalIncome');
-    const totalExpense = document.getElementById('totalExpense');
-    const list = document.getElementById('list');
-    const form = document.getElementById('transactionForm');
-    const textInput = document.getElementById('text');
-    const amountInput = document.getElementById('amount');
-    const emptyState = document.getElementById('emptyState');
-    const clearBtn = document.getElementById('clearBtn');
-
-    const localStorageTransactions = JSON.parse(localStorage.getItem('aura_transactions'));
-    let transactions = localStorage.getItem('aura_transactions') !== null ? localStorageTransactions : [];
-
-    const formatCurrency = (amount) => {
-        return '$' + amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-    };
-
-    const addTransaction = (e) => {
-        e.preventDefault();
-
-        if (textInput.value.trim() === '' || amountInput.value.trim() === '') {
-            alert('Please add a description and amount');
-            return;
-        }
-
-        const type = document.querySelector('input[name="type"]:checked').value;
-        const amountValue = parseFloat(amountInput.value);
-
-        const transaction = {
-            id: generateID(),
-            text: textInput.value,
-            amount: type === 'expense' ? -Math.abs(amountValue) : Math.abs(amountValue)
-        };
-
-        transactions.push(transaction);
-
-        addTransactionDOM(transaction);
-        updateValues();
-        updateLocalStorage();
-
-        textInput.value = '';
-        amountInput.value = '';
-    };
-
-    const generateID = () => {
-        return Math.floor(Math.random() * 100000000);
-    };
-
-    const addTransactionDOM = (transaction) => {
-        const sign = transaction.amount < 0 ? '-' : '+';
-        const item = document.createElement('li');
-
-        item.classList.add(transaction.amount < 0 ? 'exp' : 'inc');
-
-        item.innerHTML = `
-            <span>${transaction.text}</span>
-            <span class="amount-box">${sign}${formatCurrency(Math.abs(transaction.amount))}</span>
-            <button class="delete-btn" onclick="removeTransaction(${transaction.id})">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-        `;
-
-        list.insertBefore(item, list.firstChild);
+(function() {
+    // Unique data store
+    var budgetManager = {
+        records: JSON.parse(localStorage.getItem('my_unique_budget_data')) || [],
         
-        checkEmptyState();
-    };
-
-    const updateValues = () => {
-        const amounts = transactions.map(transaction => transaction.amount);
-
-        const total = amounts.reduce((acc, item) => (acc += item), 0);
-        const income = amounts.filter(item => item > 0).reduce((acc, item) => (acc += item), 0);
-        const expense = amounts.filter(item => item < 0).reduce((acc, item) => (acc += item), 0) * -1;
-
-        animateValue(balance, total, true);
-        animateValue(totalIncome, income);
-        animateValue(totalExpense, expense);
-    };
-
-    const animateValue = (obj, end, isTotal = false) => {
-        const duration = 500;
-        let startTimestamp = null;
+        save: function() {
+            localStorage.setItem('my_unique_budget_data', JSON.stringify(this.records));
+        },
         
-        let start = 0;
-        const currentText = obj.innerText.replace(/[$,]/g, '');
-        if(!isNaN(parseFloat(currentText))) {
-            start = parseFloat(currentText);
-            if(Math.abs(start - end) < 0.1) {
-                obj.innerText = (isTotal && end < 0 ? '-' : '') + formatCurrency(Math.abs(end));
-                return;
-            }
+        addRecord: function(desc, val, isIncome) {
+            this.records.push({
+                desc: desc,
+                val: isIncome ? Math.abs(val) : -Math.abs(val),
+                stamp: new Date().getTime()
+            });
+            this.save();
+            refreshUI();
+        },
+        
+        wipe: function() {
+            this.records = [];
+            this.save();
+            refreshUI();
+        },
+        
+        removeById: function(stamp) {
+            this.records = this.records.filter(function(r) { return r.stamp !== stamp; });
+            this.save();
+            refreshUI();
         }
-
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            
-            const easeProgress = 1 - Math.pow(1 - progress, 4);
-            const current = start + (end - start) * easeProgress;
-            
-            obj.innerText = (isTotal && current < 0 ? '-' : '') + formatCurrency(Math.abs(current));
-            
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            } else {
-                obj.innerText = (isTotal && end < 0 ? '-' : '') + formatCurrency(Math.abs(end));
-            }
-        };
-        window.requestAnimationFrame(step);
     };
 
-    window.removeTransaction = (id) => {
-        transactions = transactions.filter(transaction => transaction.id !== id);
-        updateLocalStorage();
-        init();
-    };
+    function formatM(num) {
+        var parts = num.toFixed(2).split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return "$" + parts.join(".");
+    }
 
-    clearBtn.addEventListener('click', () => {
-        if(transactions.length > 0 && confirm('Are you sure you want to clear all history?')) {
-            transactions = [];
-            updateLocalStorage();
-            init();
-        }
-    });
-
-    const updateLocalStorage = () => {
-        localStorage.setItem('aura_transactions', JSON.stringify(transactions));
-    };
-
-    const checkEmptyState = () => {
-        if (transactions.length === 0) {
-            emptyState.classList.remove('hidden');
-            list.classList.add('hidden');
+    function refreshUI() {
+        var bal = 0, inc = 0, exp = 0;
+        var ul = document.getElementById('list');
+        ul.innerHTML = '';
+        
+        if (budgetManager.records.length === 0) {
+            document.getElementById('emptyState').classList.remove('hidden');
         } else {
-            emptyState.classList.add('hidden');
-            list.classList.remove('hidden');
+            document.getElementById('emptyState').classList.add('hidden');
         }
-    };
 
-    const init = () => {
-        list.innerHTML = '';
-        transactions.forEach(addTransactionDOM);
-        updateValues();
-        checkEmptyState();
-    };
+        for (var i = budgetManager.records.length - 1; i >= 0; i--) {
+            var r = budgetManager.records[i];
+            bal += r.val;
+            if (r.val > 0) inc += r.val;
+            else exp += r.val;
 
-    init();
-    form.addEventListener('submit', addTransaction);
-});
+            var li = document.createElement('li');
+            li.className = r.val < 0 ? 'exp' : 'inc';
+            li.innerHTML = "<span>" + r.desc + "</span><span class='amount-box'>" + (r.val < 0 ? "-" : "+") + formatM(Math.abs(r.val)) + "</span><button class='delete-btn' data-id='" + r.stamp + "'><svg viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' width='16' height='16'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg></button>";
+            ul.appendChild(li);
+        }
+
+        document.getElementById('totalBalance').innerText = (bal < 0 ? "-" : "") + formatM(Math.abs(bal));
+        document.getElementById('totalIncome').innerText = formatM(inc);
+        document.getElementById('totalExpense').innerText = formatM(Math.abs(exp));
+        
+        // attach events to buttons
+        var btns = ul.getElementsByClassName('delete-btn');
+        for (var j = 0; j < btns.length; j++) {
+            btns[j].onclick = function() {
+                budgetManager.removeById(parseInt(this.getAttribute('data-id')));
+            };
+        }
+    }
+
+    window.addEventListener('load', function() {
+        refreshUI();
+        
+        document.getElementById('transactionForm').onsubmit = function(ev) {
+            ev.preventDefault();
+            var desc = document.getElementById('text').value;
+            var amt = parseFloat(document.getElementById('amount').value);
+            var isInc = document.querySelector('input[name="type"]:checked').value === 'income';
+            
+            if (desc && !isNaN(amt)) {
+                budgetManager.addRecord(desc, amt, isInc);
+                document.getElementById('text').value = '';
+                document.getElementById('amount').value = '';
+            }
+        };
+
+        document.getElementById('clearBtn').onclick = function() {
+            if (confirm("Clear everything?")) budgetManager.wipe();
+        };
+    });
+})();
